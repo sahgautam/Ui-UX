@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:tourist_application/controller/animation_controller.dart';
 import 'package:tourist_application/controller/favorite_controller.dart';
 import 'package:tourist_application/model/trip.dart';
 import 'package:tourist_application/statics/static.dart';
@@ -16,6 +17,10 @@ class TripDetailsPage extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     FavoriteController favoriteController = Get.find<FavoriteController>();
+
+    // intialize animation controller
+    AnimationsController animationsController = Get.put(AnimationsController());
+    animationsController.animateTripDetails();
 
     return Scaffold(
       appBar: AppBar(
@@ -74,9 +79,20 @@ class TripDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            TripOtherInfo(
-              tripListInfo: tripDetails.activities,
-              isProgram: false,
+            GetBuilder<AnimationsController>(
+              init: animationsController,
+              builder: (controller) => AnimatedBuilder(
+                animation: controller.tripDetailsAnimation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(0, controller.tripDetailsAnimation.value),
+                    child: TripOtherInfo(
+                      tripListInfo: tripDetails.activities,
+                      isProgram: false,
+                    ),
+                  );
+                },
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -96,9 +112,19 @@ class TripDetailsPage extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            TripOtherInfo(
-              tripListInfo: tripDetails.program,
-              isProgram: true,
+            GetBuilder<AnimationsController>(
+              builder: (controller) => AnimatedBuilder(
+                animation: controller.tripDetailsAnimation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(0, controller.tripDetailsAnimation.value),
+                    child: TripOtherInfo(
+                      tripListInfo: tripDetails.program,
+                      isProgram: true,
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

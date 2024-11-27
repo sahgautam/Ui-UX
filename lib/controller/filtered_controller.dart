@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:tourist_application/model/app_data.dart';
 import 'package:tourist_application/model/trip.dart';
@@ -6,15 +7,16 @@ class FilteredController extends GetxController {
   var isSummer = true;
   var isWinter = true;
   var isForFamily = true;
-
+  var isAnimated = false;
   List<Trip> trips = [];
 
   @override
   void onInit() {
     super.onInit();
-
     changeTripsWithFilter();
   }
+
+
 
   void chanageValueForSummer() {
     isSummer = !isSummer;
@@ -30,7 +32,7 @@ class FilteredController extends GetxController {
   }
 
   void chanageValueForForFamily() {
-    isForFamily = !isForFamily;
+    isForFamily= !isForFamily;
     changeTripsWithFilter();
     update();
   }
@@ -49,4 +51,3 @@ class FilteredController extends GetxController {
     update();
   }
 }
-

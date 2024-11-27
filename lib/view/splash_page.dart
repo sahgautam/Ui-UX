@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tourist_application/controller/splash_controller.dart';
+import 'package:tourist_application/controller/animation_controller.dart';
 import 'package:tourist_application/view/home_page.dart';
 
 class SplashPage extends StatelessWidget {
@@ -11,13 +11,19 @@ class SplashPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
+    AnimationsController animationsController = Get.put(AnimationsController());
+    animationsController.animateSplash();
+    
+    
+    
+    // go to homepage
     Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed(HomePage.id);
     });
-
+    
     return Scaffold(
-      body: GetBuilder<SplashController>(
-        init: SplashController(),
+      body: GetBuilder<AnimationsController>(
+        init: animationsController,
         builder: (controller) => Stack(
           children: [
             AnimatedPositioned(
@@ -25,10 +31,10 @@ class SplashPage extends StatelessWidget {
                 seconds: 2,
               ), // Adjust duration as needed
               curve: Curves.easeInOut, // You can customize the animation curve
-              left: controller.isCentered
+              left: controller.isSplashCentered
                   ? (width / 2) - 50 // Center horizontally
                   : 0, // Initial bottom-left position
-              top: controller.isCentered
+              top: controller.isSplashCentered
                   ? (height / 2) - 50// Center vertically
                   : height - 190, // Start near the bottom
               child: SizedBox(

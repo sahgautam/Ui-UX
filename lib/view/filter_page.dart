@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tourist_application/controller/animation_controller.dart';
 import 'package:tourist_application/controller/filtered_controller.dart';
 import 'package:tourist_application/statics/static.dart';
 import 'package:tourist_application/view/home_page.dart';
@@ -11,6 +12,10 @@ class FilterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FilteredController filteredController = Get.find<FilteredController>();
+    AnimationsController animationsController = Get.put(AnimationsController());
+    animationsController.animateFilters();
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       drawer: Drawer(
@@ -56,82 +61,117 @@ class FilterPage extends StatelessWidget {
         foregroundColor: Colors.white,
         title: Text(
           'بحث التصفية',
-          style: Get.textTheme.headlineLarge,
+          // style: Get.textTheme.headlineLarge,
         ),
         centerTitle: true,
       ),
-      body: Column(
+      body: Stack(
         children: [
-          const SizedBox(
-            height: 40,
-          ),
-          GetBuilder<FilteredController>(
-            init: filteredController,
-            builder: (controller) {
-              return SwitchListTile(
-                title: const Text(
-                  'رحلات صيفية',
-                  style: TextStyle(fontFamily: 'ElMessiri'),
+          GetBuilder<AnimationsController>(
+            init: animationsController,
+            builder: (animationsController) => GetBuilder<FilteredController>(
+              init: filteredController,
+              builder: (filteredController) => AnimatedPositioned(
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeInOut,
+                top: animationsController.isFilteredAnimated ? 10 : 100,
+                child: SizedBox(
+                  width: width - 10,
+                  height: height / 10,
+                  child: SwitchListTile(
+                    title: const Text(
+                      'رحلات عائلية',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    subtitle: const Text(
+                      'أظهر الرحلات التي للعوائل',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    onChanged: (value) {
+                      filteredController.chanageValueForForFamily();
+                    },
+                    value: filteredController.isForFamily,
+                    trackColor: WidgetStateProperty.resolveWith((state) {
+                      if (state.contains(WidgetState.selected)) {
+                        return main_color;
+                      }
+                      return null;
+                    }),
+                  ),
                 ),
-                subtitle: const Text(
-                  'أظهر الرحلات في فصل الصيف',
-                  style: TextStyle(fontFamily: 'ElMessiri'),
-                ),
-                onChanged: (value) {
-                  controller.chanageValueForSummer();
-                },
-                value: controller.isSummer,
-                trackColor: WidgetStateProperty.resolveWith((state) {
-                  if (state.contains(WidgetState.selected)) {
-                    return main_color;
-                  }
-                  return null;
-                }),
-              );
-            },
-          ),
-          GetBuilder<FilteredController>(
-            builder: (controller) => SwitchListTile(
-              title: const Text(
-                'رحلات شتوية',
-                style: TextStyle(fontFamily: 'ElMessiri'),
               ),
-              subtitle: const Text(
-                'أظهر الرحلات في فصل الشتاء',
-                style: TextStyle(fontFamily: 'ElMessiri'),
-              ),
-              onChanged: (value) {
-                controller.chanageValueForWinter();
-              },
-              value: controller.isWinter,
-              trackColor: WidgetStateProperty.resolveWith((state) {
-                if (state.contains(WidgetState.selected)) {
-                  return main_color;
-                }
-                return null;
-              }),
             ),
           ),
-          GetBuilder<FilteredController>(
-            builder: (controller) => SwitchListTile(
-              title: const Text(
-                'رحلات عائلية',
-                style: TextStyle(fontFamily: 'ElMessiri'),
+          GetBuilder<AnimationsController>(
+            init: animationsController,
+            builder: (animationsController) => GetBuilder<FilteredController>(
+              init: filteredController,
+              builder: (filteredController) => AnimatedPositioned(
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeInOut,
+                top: animationsController.isFilteredAnimated ? 60 : 150,
+                child: SizedBox(
+                  width: width - 10,
+                  height: height / 10,
+                  child: SwitchListTile(
+                    title: const Text(
+                      'رحلات شتوية',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    subtitle: const Text(
+                      'أظهر الرحلات في فصل الشتاء',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    onChanged: (value) {
+                      filteredController.chanageValueForWinter();
+                    },
+                    value: filteredController.isWinter,
+                    trackColor: WidgetStateProperty.resolveWith(
+                      (state) {
+                        if (state.contains(WidgetState.selected)) {
+                          return main_color;
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ),
               ),
-              subtitle: const Text(
-                'أظهر الرحلات التي للعوائل',
-                style: TextStyle(fontFamily: 'ElMessiri'),
+            ),
+          ),
+          GetBuilder<AnimationsController>(
+            init: animationsController,
+            builder: (animationsController) => GetBuilder<FilteredController>(
+              init: filteredController,
+              builder: (filteredController) => AnimatedPositioned(
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeInOut,
+                top: animationsController.isFilteredAnimated ? 110 : 200,
+                child: SizedBox(
+                  width: width - 10,
+                  height: height / 10,
+                  child: SwitchListTile(
+                    title: const Text(
+                      'رحلات صيفية',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    subtitle: const Text(
+                      'أظهر الرحلات في فصل الصيف',
+                      style: TextStyle(fontFamily: 'ElMessiri'),
+                    ),
+                    onChanged: (value) {
+                      filteredController.chanageValueForSummer();
+                    },
+                    value: filteredController.isSummer,
+                    trackColor: WidgetStateProperty.resolveWith((state) {
+                      if (state.contains(WidgetState.selected)) {
+                        return main_color;
+                      }
+                      return null;
+                    }),
+                  ),
+                ),
               ),
-              onChanged: (value) {
-                controller.chanageValueForForFamily();
-              },
-              value: controller.isForFamily,
-              trackColor: WidgetStateProperty.resolveWith((state) {
-                if (state.contains(WidgetState.selected)) {
-                  return main_color;
-                }
-                return null;
-              }),
             ),
           ),
         ],
@@ -139,5 +179,3 @@ class FilterPage extends StatelessWidget {
     );
   }
 }
-
-

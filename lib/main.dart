@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:tourist_application/binding/home_binding.dart';
 import 'package:tourist_application/controller/favorite_controller.dart';
 import 'package:tourist_application/controller/filtered_controller.dart';
 import 'package:tourist_application/view/favorite_page.dart';
@@ -37,13 +36,13 @@ class MyApp extends StatelessWidget {
       locale: const Locale('ar'),
       theme: ThemeData(
         textTheme: Get.theme.textTheme.copyWith(
-          headlineMedium: TextStyle(
+          headlineMedium: Get.theme.textTheme.headlineMedium?.copyWith(
             color: const Color(0xff1c8aec), // 0xfff1c8aec
             fontFamily: 'ElMessiri',
             fontWeight: FontWeight.bold,
             fontSize: MediaQuery.of(context).size.width / 19,
           ),
-          headlineLarge: TextStyle(
+          headlineLarge: Get.theme.textTheme.headlineLarge?.copyWith(
             color: Colors.white, // 0xfff1c8aec
             fontFamily: 'ElMessiri',
             fontWeight: FontWeight.bold,
