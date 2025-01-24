@@ -1,319 +1,223 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_application/screens/explore/explore.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+import '../booking/booking.dart';
+import '../profile/profile.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    HomeContent(),
+    ExplorePage(),
+    BookingsScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.blue[700],
-        elevation: 0,
-        title: const Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Hello! Dominic",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage("assets/profile.jpg"), // Replace with actual image
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Top section
-            Container(
-              color: Colors.blue[700],
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Where would you like to go?",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildCategoryIcon(Icons.flight, "Flights"),
-                      _buildCategoryIcon(Icons.hotel, "Stays"),
-                      _buildCategoryIcon(Icons.attractions, "Things to do"),
-                      _buildCategoryIcon(Icons.directions_car, "Cars"),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search Stays",
-                      prefixIcon: Icon(Icons.search),
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  // Horizontal List for Popular Locations
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildCircleImage("Dubai"),
-                        _buildCircleImage("Maldives"),
-                        _buildCircleImage("Bali"),
-                        _buildCircleImage("Antarctica"),
-                        _buildCircleImage("London"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Recommended Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader("Recommended", "View All"),
-                  const SizedBox(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildRecommendationCard("Golden Gate", "Idaho", 40, 4.5),
-                        _buildRecommendationCard("Maligne Lake", "Canada", 40, 4.5),
-                        _buildRecommendationCard("Lake McDonald", "Canada", 40, 4.5),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Popular Destination
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader("Popular Destination", "View All"),
-                  const SizedBox(height: 10),
-                  Column(
-                    children: [
-                      _buildDestinationCard("Enjoy Summer Vacation", "Mossley, UK", 200, 4.7),
-                      _buildDestinationCard("Best place for honeymoon", "Switzerland", 250, 4.8),
-                      _buildDestinationCard("Enjoy in a Farm House", "Switzerland", 250, 4.8),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // Last Minute Deal
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Last Minute Deal",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  _buildLastMinuteDeal(),
-                ],
-              ),
-            ),
-
-            // Map Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Find Places in a Map",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/map_placeholder.jpg"), // Replace with actual map image
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: SafeArea(child: _pages[_currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        onTap: (index) => setState(() => _currentIndex = index),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Bookings'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: 'Profile'),
+        ],
         type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: "Explore"),
-          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Bookmarks"),
-          BottomNavigationBarItem(icon: Icon(Icons.video_library), label: "Shorts"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCategoryIcon(IconData icon, String label) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.white,
-          child: Icon(icon, color: Colors.blue[700], size: 30),
-        ),
-        SizedBox(height: 8),
-        Text(label, style: TextStyle(color: Colors.white)),
-      ],
-    );
-  }
-
-  Widget _buildCircleImage(String label) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage("assets/$label.jpg"), // Replace with actual images
-          ),
-          SizedBox(height: 8),
-          Text(label),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSectionHeader(String title, String actionText) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Text(actionText, style: TextStyle(color: Colors.blue)),
-      ],
-    );
-  }
-
-  Widget _buildRecommendationCard(String title, String location, int price, double rating) {
-    return Container(
-      width: 200,
-      margin: EdgeInsets.only(right: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset("assets/$title.jpg", height: 120, fit: BoxFit.cover),
-          ),
-          SizedBox(height: 8),
-          Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-          Text(location, style: TextStyle(color: Colors.grey)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("\$$price / Visit"),
-              Row(
-                children: [
-                  Icon(Icons.star, color: Colors.yellow, size: 16),
-                  Text("$rating"),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDestinationCard(String title, String location, int price, double rating) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset("assets/$title.jpg", width: 80, height: 80, fit: BoxFit.cover),
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(location, style: TextStyle(color: Colors.grey)),
-                Text("From \$$price / person"),
-              ],
-            ),
-          ),
-          Column(
-            children: [
-              Icon(Icons.star, color: Colors.yellow),
-              Text("$rating"),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLastMinuteDeal() {
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey[200],
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset("assets/Maldives.jpg", width: 100, height: 80, fit: BoxFit.cover),
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Maldives", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("Classic Room"),
-                Row(
-                  children: [
-                    Text("\$165", style: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey)),
-                    SizedBox(width: 8),
-                    Text("\$118 / night", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          ElevatedButton(onPressed: () {}, child: Text("View Details")),
-        ],
       ),
     );
   }
 }
+
+class HomeContent extends StatefulWidget {
+  @override
+  _HomeContentState createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  int selectedIndex = 0;
+  final List<String> segments = ['Today', 'This Week', 'This Month'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Discover the World',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black)),
+                SizedBox(height: 8),
+                Text('Hello, Dominic! Ready for your next adventure?',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey)),
+                SizedBox(height: 24),
+                _buildSectionTitle('Top Destinations'),
+                _buildHorizontalList('destination', 4),
+                _buildSectionTitle('Weekend Getaways'),
+                _buildHorizontalList('getaway', 3),
+                _buildSectionTitle('Cultural Experiences'),
+                _buildHorizontalList('culture', 2),
+                _buildSectionTitle('Trip Tracker'),
+                _buildProgressTracker(),
+                SizedBox(height: 20),
+                _buildInfoCardsGrid(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black)),
+        SizedBox(height: 8),
+        Text('Curated just for you.',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400)),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildHorizontalList(String category, int count) {
+    return Container(
+      height: 150,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: count,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            width: MediaQuery.of(context).size.width * 0.63,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                    child: Image.asset(
+                      'assets/$category$index.jpg', // Replace with actual images
+                      height: 100,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Place ${index + 1}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildProgressTracker() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: ToggleButtons(
+            borderColor: Colors.grey,
+            fillColor: Colors.orange,
+            selectedBorderColor: Colors.orange,
+            selectedColor: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            constraints: BoxConstraints.expand(
+                height: 45, width: MediaQuery.of(context).size.width / 3.5),
+            isSelected: List.generate(
+                segments.length, (index) => index == selectedIndex),
+            onPressed: (int index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            children: segments.map((e) => Text(e)).toList(),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildInfoCardsGrid() {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      padding: EdgeInsets.all(8),
+      children: [
+        infoCard('5 Trips', 'Total Trips', Icons.map),
+        infoCard('3 Countries', 'Visited', Icons.public),
+        infoCard('8', 'Bucket List Items', Icons.favorite),
+        infoCard('2 Achievements', 'Awards', Icons.emoji_events),
+      ],
+    );
+  }
+
+  Widget infoCard(String data, String title, IconData icon) {
+    return Card(
+      elevation: 2,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(icon, size: 30, color: Colors.orange),
+            SizedBox(height: 8),
+            Text(data,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(title, style: TextStyle(fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
