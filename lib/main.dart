@@ -1,63 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
-import 'package:tourist_application/controller/favorite_controller.dart';
-import 'package:tourist_application/controller/filtered_controller.dart';
-import 'package:tourist_application/view/favorite_page.dart';
-import 'package:tourist_application/view/home_page.dart';
-import 'package:tourist_application/view/category_trips_page.dart';
-import 'package:tourist_application/view/filter_page.dart';
-import 'package:tourist_application/view/splash_page.dart';
-import 'package:tourist_application/view/trip_details_page.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:tourist_application/screens/auth/login.dart';
+import 'package:tourist_application/screens/auth/register.dart';
+import 'package:tourist_application/screens/explore/explore.dart';
+import 'package:tourist_application/screens/home/home.dart';
+import 'package:tourist_application/screens/profile/account_settings/booking_history.dart';
+import 'package:tourist_application/screens/profile/account_settings/change_password.dart';
+import 'package:tourist_application/screens/profile/account_settings/edit_profile.dart';
+import 'package:tourist_application/screens/profile/account_settings/language_preferences.dart';
+import 'package:tourist_application/screens/profile/account_settings/notifications.dart';
+import 'package:tourist_application/screens/profile/account_settings/payment_method.dart';
+import 'package:tourist_application/screens/profile/profile.dart';
+import 'package:tourist_application/screens/profile/support/about_us.dart';
+import 'package:tourist_application/screens/profile/support/help_and_support.dart';
+import 'package:tourist_application/screens/profile/support/privacy_and_policy.dart';
 
 void main() {
-  Get.put(FilteredController(), permanent: true);
-  Get.put(FavoriteController(), permanent: true);
-
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      supportedLocales: const [
-        Locale('en', ''), // English
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: const Locale('en'),
-      theme: ThemeData(
-        textTheme: Get.theme.textTheme.copyWith(
-          headlineMedium: Get.theme.textTheme.headlineMedium?.copyWith(
-            color: const Color(0xff1c8aec), // 0xfff1c8aec
-            fontFamily: 'OpenSans',
-            fontWeight: FontWeight.bold,
-            fontSize: MediaQuery.of(context).size.width / 19,
-          ),
-          headlineLarge: Get.theme.textTheme.headlineLarge?.copyWith(
-            color: Colors.white, // 0xfff1c8aec
-            fontFamily: 'OpenSans',
-            fontWeight: FontWeight.bold,
-            fontSize: MediaQuery.of(context).size.width / 19,
-          ),
-        ),
-      ),
-      initialRoute: SplashPage.id,
-      getPages: [
-        GetPage(name: HomePage.id, page: () => HomePage()),
-        GetPage(name: CategoryTripsPage.id, page: () => CategoryTripsPage()),
-        GetPage(name: FilterPage.id, page: () => FilterPage()),
-        GetPage(name: TripDetailsPage.id, page: () => TripDetailsPage()),
-        GetPage(name: FavoritePage.id, page: () => FavoritePage()),
-        GetPage(name: SplashPage.id, page: () => SplashPage())
-      ],
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/explore': (context) => const ExplorePage(),
+        '/profile': (context) => const ProfileScreen(),
+        '/edit_profile': (context) => const EditProfilePage(),
+        '/change_password': (context) => const ChangePasswordPage(),
+        '/payment_methods': (context) => const PaymentMethodsPage(),
+        '/booking_history': (context) => const BookingHistoryPage(),
+        '/notifications': (context) => const NotificationsPage(),
+        '/language_preferences': (context) => const LanguagePreferencesPage(),
+        '/help_support': (context) => const HelpSupportPage(),
+        '/privacy_policy': (context) => const PrivacyPolicyPage(),
+        '/about_us': (context) => const AboutUsPage(),
+      },
     );
   }
 }
