@@ -16,7 +16,7 @@ class CategoryTripsPage extends StatelessWidget {
 
     FilteredController filteredController = Get.find<FilteredController>();
 
-    // get trips for this category
+    // Get trips for this category
     List<Trip> trips = filteredController.trips.where((trip) {
       return trip.categories.contains(arguments[0]) ? true : false;
     }).toList();
@@ -28,7 +28,7 @@ class CategoryTripsPage extends StatelessWidget {
         title: Text(
           arguments[1],
           style: const TextStyle(
-            fontFamily: 'ElMessiri',
+            fontFamily: 'OpenSans',
             color: Colors.white,
           ),
         ),
@@ -68,11 +68,8 @@ class CategoryTripsPage extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      'لا توجد رحلات في هذا الصنف',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'ElMessiri'
-                      ),
+                      'No trips available in this category',
+                      style: TextStyle(fontSize: 18, fontFamily: 'OpenSans'),
                     ),
                   ],
                 ),

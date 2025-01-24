@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tourist_application/statics/static.dart';
 
@@ -25,7 +24,7 @@ class DrawerItem extends StatelessWidget {
         text,
         style: TextStyle(
           color: Colors.black, // 0xfff1c8aec
-          fontFamily: 'ElMessiri',
+          fontFamily: 'OpenSans',
           fontWeight: FontWeight.bold,
           fontSize: MediaQuery.of(context).size.width / 19,
         ),

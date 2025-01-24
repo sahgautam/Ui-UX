@@ -1,7 +1,7 @@
 name: tourist_application
 description: "A new Flutter project."
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+2
 
@@ -16,7 +16,6 @@ dependencies:
   get: ^4.6.6
 
   cupertino_icons: ^1.0.8
-  
 
 dev_dependencies:
   flutter_test:
@@ -26,25 +25,24 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.1
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
 
   fonts:
-    - family: ElMessiri
+    - family: OpenSans
       fonts:
-        - asset: assets/fonts/ElMessiri-Bold.ttf
+        - asset: assets/fonts/OpenSans-Italic.ttf
           weight: 700
-        - asset: assets/fonts/ElMessiri-Regular.ttf
-        - asset: assets/fonts/ElMessiri-SemiBold.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
           weight: 600
     - family: Amiri
       fonts:
-        - asset: assets/fonts/Amiri-Regular.ttf
-        - asset: assets/fonts/Amiri-Bold.ttf
-  
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Regular.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -59,4 +57,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-  

@@ -76,7 +76,7 @@ class CategoryWidget extends StatelessWidget {
                   category.title,
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'ElMessiri',
+                    fontFamily: 'OpenSans',
                     fontWeight: FontWeight.bold,
                     fontSize: width / 17,
                   ),
@@ -89,4 +89,3 @@ class CategoryWidget extends StatelessWidget {
     );
   }
 }
-

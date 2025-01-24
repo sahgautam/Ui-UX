@@ -12,15 +12,15 @@ class TripWidget extends StatelessWidget {
     String seasonText = '';
     switch (season) {
       case Season.Summer:
-        seasonText = 'الصيف';
+        seasonText = 'Summer';
       case Season.Spring:
-        seasonText = 'الربيع';
+        seasonText = 'Spring';
       case Season.Winter:
-        seasonText = 'الشتاء';
+        seasonText = 'Winter';
       case Season.Autumn:
-        seasonText = 'الخريف';
+        seasonText = 'Autumn';
       case Season.SummerAndWinter:
-        seasonText = 'كل الفصول';
+        seasonText = 'All Seasons';
     }
     return seasonText;
   }
@@ -96,7 +96,7 @@ class TripWidget extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: width / 19,
-                      fontFamily: 'ElMessiri',
+                      fontFamily: 'OpenSans',
                     ),
                   ),
                 ),
@@ -117,7 +117,7 @@ class TripWidget extends StatelessWidget {
                     const SizedBox(
                       width: 2,
                     ),
-                    Text('${trip.duration} أيام'),
+                    Text('${trip.duration} days'),
                   ],
                 ),
                 Row(
@@ -157,8 +157,8 @@ class TripWidget extends StatelessWidget {
                       width: 2,
                     ),
                     trip.isForFamilies == true
-                        ? const Text('عائلي')
-                        : const Text('فردي'),
+                        ? const Text('Family')
+                        : const Text('Individual'),
                   ],
                 ),
               ],

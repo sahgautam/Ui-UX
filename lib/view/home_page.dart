@@ -9,16 +9,16 @@ import 'package:tourist_application/widgets/drawer_item.dart';
 
 class HomePage extends StatelessWidget {
   static const id = '/';
-  
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     print('width $width, height $height');
 
-    List<String> pages_names = [
-      'التصنيفات',
-      'المفضلة',
+    List<String> pagesNames = [
+      'Categories',
+      'Favorites',
     ];
 
     List<Widget> pages = [
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                   height: 120,
                   child: Center(
                     child: Text(
-                      'دليلك السياحي',
+                      'Your Tourist Guide',
                       style: Get.theme.textTheme.headlineLarge,
                     ),
                   ),
@@ -48,14 +48,14 @@ class HomePage extends StatelessWidget {
                 ),
                 DrawerItem(
                   iconData: Icons.work_outline,
-                  text: 'الرحلات',
+                  text: 'Trips',
                   onTap: () {
                     Get.offNamed(HomePage.id);
                   },
                 ),
                 DrawerItem(
                   iconData: Icons.filter_list_outlined,
-                  text: 'التصفية',
+                  text: 'Filter',
                   onTap: () {
                     Get.offNamed(FilterPage.id);
                   },
@@ -69,10 +69,10 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.white,
         title: GetBuilder<HomeController>(
           builder: (container) => Text(
-            pages_names[container.pageIndex],
+            pagesNames[container.pageIndex],
             style: const TextStyle(
               color: Colors.white,
-              fontFamily: 'ElMessiri',
+              fontFamily: 'OpenSans',
             ),
           ),
         ),
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Icon(Icons.home),
               ),
-              label: 'التصنيفات',
+              label: 'Categories',
             ),
             BottomNavigationBarItem(
               icon: InkWell(
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Icon(Icons.favorite),
               ),
-              label: 'المفضلة',
+              label: 'Favorites',
             ),
           ],
         ),

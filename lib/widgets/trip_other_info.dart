@@ -27,7 +27,7 @@ class TripOtherInfo extends StatelessWidget {
         itemBuilder: (context, index) {
           day += 1;
           return Container(
-            padding: const EdgeInsets.only(right: 5,top: 5),
+            padding: const EdgeInsets.only(right: 5, top: 5),
             child: Card(
               elevation: 0,
               child: Row(
@@ -42,10 +42,10 @@ class TripOtherInfo extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'يوم $day',
+                              'Day $day',
                               style: const TextStyle(
                                 color: main_color,
-                                fontFamily: 'ElMessiri',
+                                fontFamily: 'OpenSans',
                               ),
                             ),
                           ),

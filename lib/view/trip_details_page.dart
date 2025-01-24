@@ -13,12 +13,12 @@ class TripDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Trip tripDetails = Get.arguments as Trip;
-    print('arguments from cateogry_trips is $tripDetails');
+    print('Arguments from category_trips are $tripDetails');
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     FavoriteController favoriteController = Get.find<FavoriteController>();
 
-    // intialize animation controller
+    // Initialize animation controller
     AnimationsController animationsController = Get.put(AnimationsController());
     animationsController.animateTripDetails();
 
@@ -29,7 +29,7 @@ class TripDetailsPage extends StatelessWidget {
         title: Text(
           tripDetails.title,
           style: const TextStyle(
-            fontFamily: 'ElMessiri',
+            fontFamily: 'OpenSans',
           ),
         ),
         centerTitle: true,
@@ -74,7 +74,7 @@ class TripDetailsPage extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'الأنشطة',
+                  'Activities',
                   style: Get.theme.textTheme.headlineMedium,
                 ),
               ),
@@ -104,7 +104,7 @@ class TripDetailsPage extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'البرنامج اليومي',
+                  'Daily Program',
                   style: Get.theme.textTheme.headlineMedium,
                 ),
               ),
@@ -135,10 +135,10 @@ class TripDetailsPage extends StatelessWidget {
           backgroundColor: Colors.amber,
           onPressed: () {
             if (controller.favoriteTrips.contains(tripDetails)) {
-              print('trip ${tripDetails.title} will removed from favorites');
+              print('Trip ${tripDetails.title} will be removed from favorites');
               controller.removeTripFromFavorite(tripDetails);
             } else {
-              print('trip ${tripDetails.title} will added to favorites');
+              print('Trip ${tripDetails.title} will be added to favorites');
               controller.addTripToFavorite(tripDetails);
             }
           },

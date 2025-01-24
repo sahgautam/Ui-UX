@@ -26,25 +26,24 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       supportedLocales: const [
         Locale('en', ''), // English
-        Locale('ar', ''), // Arabic
       ],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: const Locale('ar'),
+      locale: const Locale('en'),
       theme: ThemeData(
         textTheme: Get.theme.textTheme.copyWith(
           headlineMedium: Get.theme.textTheme.headlineMedium?.copyWith(
             color: const Color(0xff1c8aec), // 0xfff1c8aec
-            fontFamily: 'ElMessiri',
+            fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
             fontSize: MediaQuery.of(context).size.width / 19,
           ),
           headlineLarge: Get.theme.textTheme.headlineLarge?.copyWith(
             color: Colors.white, // 0xfff1c8aec
-            fontFamily: 'ElMessiri',
+            fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
             fontSize: MediaQuery.of(context).size.width / 19,
           ),

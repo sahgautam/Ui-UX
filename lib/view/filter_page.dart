@@ -29,7 +29,7 @@ class FilterPage extends StatelessWidget {
                   height: 120,
                   child: Center(
                     child: Text(
-                      'دليلك السياحي',
+                      'Your Tourist Guide',
                       style: Get.theme.textTheme.headlineLarge,
                     ),
                   ),
@@ -39,14 +39,14 @@ class FilterPage extends StatelessWidget {
                 ),
                 DrawerItem(
                   iconData: Icons.work_outline,
-                  text: 'الرحلات',
+                  text: 'Trips',
                   onTap: () {
                     Get.offNamed(HomePage.id);
                   },
                 ),
                 DrawerItem(
                   iconData: Icons.filter_list_outlined,
-                  text: 'التصفية',
+                  text: 'Filter',
                   onTap: () {
                     Get.offNamed(FilterPage.id);
                   },
@@ -60,8 +60,7 @@ class FilterPage extends StatelessWidget {
         backgroundColor: main_color,
         foregroundColor: Colors.white,
         title: Text(
-          'بحث التصفية',
-          // style: Get.textTheme.headlineLarge,
+          'Filter Search',
         ),
         centerTitle: true,
       ),
@@ -80,12 +79,12 @@ class FilterPage extends StatelessWidget {
                   height: height / 10,
                   child: SwitchListTile(
                     title: const Text(
-                      'رحلات عائلية',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Family Trips',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     subtitle: const Text(
-                      'أظهر الرحلات التي للعوائل',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Show trips suitable for families',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     onChanged: (value) {
                       filteredController.chanageValueForForFamily();
@@ -115,12 +114,12 @@ class FilterPage extends StatelessWidget {
                   height: height / 10,
                   child: SwitchListTile(
                     title: const Text(
-                      'رحلات شتوية',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Winter Trips',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     subtitle: const Text(
-                      'أظهر الرحلات في فصل الشتاء',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Show trips in winter season',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     onChanged: (value) {
                       filteredController.chanageValueForWinter();
@@ -152,12 +151,12 @@ class FilterPage extends StatelessWidget {
                   height: height / 10,
                   child: SwitchListTile(
                     title: const Text(
-                      'رحلات صيفية',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Summer Trips',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     subtitle: const Text(
-                      'أظهر الرحلات في فصل الصيف',
-                      style: TextStyle(fontFamily: 'ElMessiri'),
+                      'Show trips in summer season',
+                      style: TextStyle(fontFamily: 'OpenSans'),
                     ),
                     onChanged: (value) {
                       filteredController.chanageValueForSummer();
