@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_application/core/utils/asset_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -10,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue[700],
         elevation: 0,
-        title: Text(
+        title: const Text(
           "Profile",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -28,10 +29,11 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage("assets/profile.jpg"), // Replace with actual image
+                    backgroundImage: AssetImage(Assets.images
+                        .profile), // Ensure 'Assets.images.profile' resolves to a correct path.
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     "Dominic Carter",
                     style: TextStyle(
                       color: Colors.white,
@@ -39,8 +41,8 @@ class ProfileScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Text(
+                  const SizedBox(height: 4),
+                  const Text(
                     "dominic.carter@example.com",
                     style: TextStyle(
                       color: Colors.white70,
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Account Options
             Padding(
@@ -58,14 +60,14 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Account Settings",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildOption(
                     context,
                     icon: Icons.person,
@@ -105,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Support and Logout
             Padding(
@@ -113,14 +115,14 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Support",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   _buildOption(
                     context,
                     icon: Icons.help_outline,
@@ -142,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Logout Button
             Center(
@@ -150,23 +152,24 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {
                   // Implement logout functionality
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Logged out successfully!")),
+                    const SnackBar(content: Text("Logged out successfully!")),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Logout",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -175,11 +178,11 @@ class ProfileScreen extends StatelessWidget {
 
   // Widget to build an account option
   Widget _buildOption(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-        required String route,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String route,
+  }) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
@@ -194,34 +197,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Helper Function to Build Simple Pages
-// Widget _buildSimplePage(String title) {
-//   return Scaffold(
-//     appBar: AppBar(
-//       backgroundColor: Colors.blue[700],
-//       title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-//     ),
-//     body: Center(
-//       child: Text(
-//         title,
-//         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//       ),
-//     ),
-//   );
-// }

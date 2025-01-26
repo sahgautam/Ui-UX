@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:tourist_application/core/utils/util.dart';
 
 class BookingsScreen extends StatefulWidget {
-  const BookingsScreen({super.key});
+  const BookingsScreen({Key? key}) : super(key: key);
 
   @override
   _BookingsScreenState createState() => _BookingsScreenState();
 }
 
 class _BookingsScreenState extends State<BookingsScreen> {
-  int selectedIndex = 0; // Default to "Upcoming" bookings
+  int selectedIndex = 0;
 
   final List<String> bookingCategories = ['Upcoming', 'Past', 'Canceled'];
 
-  // Sample data for bookings
-  final List<Map<String, String>> bookings = [
+  final List<Map<String, dynamic>> bookings = [
     {
       "title": "Trip to Maldives",
       "date": "Feb 20, 2025",
       "status": "Upcoming",
-      "image": "assets/maldives.jpg"
+      "image":
+          "https://lilybeachmaldives.com/wp-content/uploads/2017/09/aerial-2.jpg"
     },
     {
       "title": "Visit to Paris",
       "date": "Jan 10, 2025",
       "status": "Upcoming",
-      "image": "assets/paris.jpg"
+      "image":
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/800px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg"
     },
     {
       "title": "Trip to Bali",
       "date": "Dec 15, 2024",
       "status": "Past",
-      "image": "assets/bali.jpg"
+      "image":
+          "https://www.viceroybali.com/wp-content/uploads/2024/11/Bali-Trip-Cost-1.webp"
     },
     {
       "title": "Visit to Dubai",
       "date": "Nov 5, 2024",
       "status": "Canceled",
-      "image": "assets/dubai.jpg"
+      "image":
+          "https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/article/stories/dubai/dubai-architecture-five-inspiring-designers/hero-burj-al-arab/hero-burj-al-arab__square.jpg"
     },
   ];
 
@@ -49,30 +54,29 @@ class _BookingsScreenState extends State<BookingsScreen> {
       ),
       body: Column(
         children: [
-          // Toggle for booking categories
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ToggleButtons(
-              borderRadius: BorderRadius.circular(30),
-              fillColor: Colors.blue[700],
-              selectedColor: Colors.white,
-              isSelected: List.generate(
-                  bookingCategories.length, (index) => index == selectedIndex),
-              onPressed: (int index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              children: bookingCategories
-                  .map((category) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(category),
-              ))
-                  .toList(),
+            padding: EdgeInsets.symmetric(
+                horizontal: kHorizontalMargin, vertical: kVerticalMargin),
+            child: SizedBox(
+              width: double.infinity,
+              child: ToggleButtons(
+                borderRadius: BorderRadius.circular(30),
+                fillColor: Colors.blue[700],
+                selectedColor: Colors.white,
+                isSelected: List.generate(bookingCategories.length,
+                    (index) => index == selectedIndex),
+                onPressed: (int index) {
+                  setState(() => selectedIndex = index);
+                },
+                children: bookingCategories
+                    .map((category) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(category),
+                        ))
+                    .toList(),
+              ),
             ),
           ),
-
-          // Bookings List
           Expanded(
             child: ListView.builder(
               itemCount: bookings.length,
@@ -80,12 +84,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 final booking = bookings[index];
                 if (booking["status"] == bookingCategories[selectedIndex]) {
                   return _buildBookingCard(
-                      title: booking["title"]!,
-                      date: booking["date"]!,
-                      image: booking["image"]!,
-                      status: booking["status"]!);
+                    title: booking["title"],
+                    date: booking["date"],
+                    image: booking["image"],
+                    status: booking["status"],
+                  );
                 }
-                return SizedBox(); // Skip if booking status doesn't match
+                return SizedBox.shrink();
               },
             ),
           ),
@@ -94,75 +99,74 @@ class _BookingsScreenState extends State<BookingsScreen> {
     );
   }
 
-  Widget _buildBookingCard({
-    required String title,
-    required String date,
-    required String image,
-    required String status,
-  }) {
+  Widget _buildBookingCard(
+      {required String title,
+      required String date,
+      required String image,
+      required String status}) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
+      elevation: 4,
       child: Row(
         children: [
-          // Image
           ClipRRect(
             borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
-            child: Image.asset(
-              image,
+            child: CachedNetworkImage(
+              imageUrl: image,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              fit: BoxFit.cover,
               width: 100,
               height: 100,
-              fit: BoxFit.cover,
             ),
           ),
           SizedBox(width: 16),
-
-          // Details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
+                Text(title,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 SizedBox(height: 4),
                 Text(date, style: TextStyle(color: Colors.grey)),
                 SizedBox(height: 8),
                 Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: _getStatusColor(status).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Text(
-                    status,
-                    style: TextStyle(
-                      color: _getStatusColor(status),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Text(status,
+                      style: TextStyle(
+                        color: _getStatusColor(status),
+                        fontWeight: FontWeight.bold,
+                      )),
                 ),
               ],
             ),
           ),
-
-          // View Details Button
-          ElevatedButton(
-            onPressed: () {
-              // Navigate to booking details or implement action
-            },
-            child: Text("View Details"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "View Details",
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[700],
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  // Helper function to get status color
   Color _getStatusColor(String status) {
     switch (status) {
       case "Upcoming":

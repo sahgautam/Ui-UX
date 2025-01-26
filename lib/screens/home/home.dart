@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tourist_application/screens/explore/explore.dart';
 
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(child: _pages[_currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
@@ -100,7 +101,9 @@ class _HomeContentState extends State<HomeContent> {
       children: [
         Text(title,
             style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black)),
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Colors.black)),
         SizedBox(height: 8),
         Text('Curated just for you.',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400)),
@@ -111,7 +114,7 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _buildHorizontalList(String category, int count) {
     return Container(
-      height: 150,
+      height: 220,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: count,
@@ -127,18 +130,16 @@ class _HomeContentState extends State<HomeContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                    child: Image.asset(
-                      'assets/$category$index.jpg', // Replace with actual images
-                      height: 100,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(16),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://www.travelandleisure.com/thmb/008TMuCWpYImHX7FtHIjSj48LUw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/vienna-austria-BPEUROJAN1019-19c44e8a89cd48d28ef37d4d8ef28cf8.jpg',
+                        fit: BoxFit.cover,
+                      )),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Place ${index + 1}',
+                      'Destination ${index + 1}',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -216,8 +217,3 @@ class _HomeContentState extends State<HomeContent> {
     );
   }
 }
-
-
-
-
-

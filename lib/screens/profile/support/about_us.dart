@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tourist_application/core/utils/asset_provider.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -24,7 +25,8 @@ class AboutUsPage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage("assets/company_logo.jpg"), // Replace with actual logo
+                    backgroundImage: AssetImage(
+                        "assets/company_logo.jpg"), // Replace with actual logo
                   ),
                   SizedBox(height: 16),
                   Text(
@@ -59,7 +61,7 @@ class AboutUsPage extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               "At Our Travel App, we aim to make travel planning seamless and enjoyable. "
-                  "Our mission is to connect travelers with unforgettable destinations, unique experiences, and unparalleled convenience.",
+              "Our mission is to connect travelers with unforgettable destinations, unique experiences, and unparalleled convenience.",
               style: TextStyle(fontSize: 16, height: 1.5),
             ),
             SizedBox(height: 30),
@@ -78,17 +80,20 @@ class AboutUsPage extends StatelessWidget {
                 _buildValueItem(
                   icon: Icons.explore,
                   title: "Exploration",
-                  description: "We believe in exploring new places and helping others do the same.",
+                  description:
+                      "We believe in exploring new places and helping others do the same.",
                 ),
                 _buildValueItem(
                   icon: Icons.group,
                   title: "Community",
-                  description: "We foster a global community of travelers and explorers.",
+                  description:
+                      "We foster a global community of travelers and explorers.",
                 ),
                 _buildValueItem(
                   icon: Icons.eco,
                   title: "Sustainability",
-                  description: "We promote responsible and sustainable travel practices.",
+                  description:
+                      "We promote responsible and sustainable travel practices.",
                 ),
               ],
             ),
@@ -108,17 +113,20 @@ class AboutUsPage extends StatelessWidget {
                 _buildTeamMember(
                   name: "John Doe",
                   role: "CEO & Founder",
-                  imagePath: "assets/team_member_1.jpg", // Replace with actual image
+                  imagePath:
+                      "assets/team_member_1.jpg", // Replace with actual image
                 ),
                 _buildTeamMember(
                   name: "Jane Smith",
                   role: "Head of Product",
-                  imagePath: "assets/team_member_2.jpg", // Replace with actual image
+                  imagePath:
+                      "assets/team_member_2.jpg", // Replace with actual image
                 ),
                 _buildTeamMember(
                   name: "Alex Johnson",
                   role: "Lead Designer",
-                  imagePath: "assets/team_member_3.jpg", // Replace with actual image
+                  imagePath:
+                      "assets/team_member_3.jpg", // Replace with actual image
                 ),
               ],
             ),
@@ -204,7 +212,8 @@ class AboutUsPage extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage(imagePath), // Replace with actual image
+            backgroundImage:
+                AssetImage(Assets.images.profile), // Replace with actual image
           ),
           SizedBox(width: 16),
           Column(

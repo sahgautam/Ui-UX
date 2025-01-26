@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BookingHistoryPage extends StatelessWidget {
@@ -7,7 +8,7 @@ class BookingHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Booking History",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -18,15 +19,14 @@ class BookingHistoryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Page Title
-            Text(
+            const Text(
               "Your Past Bookings",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Booking History List
             Expanded(
@@ -37,28 +37,32 @@ class BookingHistoryPage extends StatelessWidget {
                     date: "Jan 15, 2025",
                     status: "Completed",
                     price: "\$1,200",
-                    imagePath: "assets/maldives.jpg",
+                    imageUrl:
+                        "https://visitmaldives.s3.amazonaws.com/kobdmEY8/c/4yvh1rdl-shareable_image.jpg",
                   ),
                   _buildBookingCard(
                     destination: "Paris",
                     date: "Dec 20, 2024",
                     status: "Cancelled",
                     price: "\$800",
-                    imagePath: "assets/paris.jpg",
+                    imageUrl:
+                        "https://upload.wikimedia.org/wikipedia/commons/7/75/Tour_Eiffel_-_night_%282016%29.jpg",
                   ),
                   _buildBookingCard(
                     destination: "Bali",
                     date: "Nov 10, 2024",
                     status: "Completed",
                     price: "\$1,000",
-                    imagePath: "assets/bali.jpg",
+                    imageUrl:
+                        "https://balidave.com/wp-content/uploads/2022/11/best-hotel-bali.jpeg",
                   ),
                   _buildBookingCard(
                     destination: "Dubai",
                     date: "Oct 5, 2024",
                     status: "Completed",
                     price: "\$900",
-                    imagePath: "assets/dubai.jpg",
+                    imageUrl:
+                        "https://images.musement.com/cover/0002/45/dubai-skyline-at-dusk-jpg_header-144981.jpeg",
                   ),
                 ],
               ),
@@ -75,7 +79,7 @@ class BookingHistoryPage extends StatelessWidget {
     required String date,
     required String status,
     required String price,
-    required String imagePath,
+    required String imageUrl,
   }) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -86,18 +90,20 @@ class BookingHistoryPage extends StatelessWidget {
         children: [
           // Image Section
           ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12),
               bottomLeft: Radius.circular(12),
             ),
-            child: Image.asset(
-              imagePath,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               width: 100,
               height: 100,
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
 
           // Details Section
           Expanded(
@@ -108,38 +114,38 @@ class BookingHistoryPage extends StatelessWidget {
                 children: [
                   Text(
                     destination,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     "Date: $date",
                     style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     "Price: $price",
                     style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Icon(
                         status == "Completed"
                             ? Icons.check_circle
                             : Icons.cancel,
-                        color: status == "Completed" ? Colors.green : Colors.red,
+                        color:
+                            status == "Completed" ? Colors.green : Colors.red,
                         size: 16,
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         status,
                         style: TextStyle(
-                          color: status == "Completed"
-                              ? Colors.green
-                              : Colors.red,
+                          color:
+                              status == "Completed" ? Colors.green : Colors.red,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

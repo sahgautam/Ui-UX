@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
+import 'package:tourist_application/core/utils/util.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
@@ -139,7 +140,8 @@ class ExplorePage extends StatelessWidget {
   }
 
   // Destination Card Widget
-  Widget _buildDestinationCard(String title, String location, String imagePath) {
+  Widget _buildDestinationCard(
+      String title, String location, String imagePath) {
     return Container(
       width: 180,
       margin: EdgeInsets.only(right: 16),
@@ -147,14 +149,10 @@ class ExplorePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              imagePath,
-              height: 120,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                  imageUrl:
+                      'https://hips.hearstapps.com/hmg-prod/images/vienna-best-cities-to-visit-europe-alexander-spatari-66a221dd448d1.jpg')),
           SizedBox(height: 8),
           Text(
             title,
@@ -173,18 +171,17 @@ class ExplorePage extends StatelessWidget {
   Widget _buildTrendingCard(
       String title, String location, String imagePath, String priceRange) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      height: 150,
+      margin: EdgeInsets.symmetric(
+          horizontal: kHorizontalMargin, vertical: kVerticalMargin),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              imagePath,
-              height: 80,
-              width: 80,
-              fit: BoxFit.cover,
-            ),
-          ),
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                  imageUrl:
+                      'https://i.pinimg.com/736x/d1/77/e0/d177e0ec95b35bec311c534628db1d8f.jpg',
+                  fit: BoxFit.cover)),
           SizedBox(width: 12),
           Expanded(
             child: Column(
