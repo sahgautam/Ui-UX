@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:tourist_application/screens/auth/login.dart';
-import 'package:tourist_application/screens/auth/register.dart';
-import 'package:tourist_application/screens/explore/explore.dart';
-import 'package:tourist_application/screens/home/home.dart';
-import 'package:tourist_application/screens/profile/account_settings/booking_history.dart';
-import 'package:tourist_application/screens/profile/account_settings/change_password.dart';
-import 'package:tourist_application/screens/profile/account_settings/edit_profile.dart';
-import 'package:tourist_application/screens/profile/account_settings/language_preferences.dart';
-import 'package:tourist_application/screens/profile/account_settings/notifications.dart';
-import 'package:tourist_application/screens/profile/account_settings/payment_method.dart';
-import 'package:tourist_application/screens/profile/profile.dart';
-import 'package:tourist_application/screens/profile/support/about_us.dart';
-import 'package:tourist_application/screens/profile/support/help_and_support.dart';
-import 'package:tourist_application/screens/profile/support/privacy_and_policy.dart';
+import 'package:toursandtravel/screens/auth/login.dart';
+import 'package:toursandtravel/screens/auth/register.dart';
+import 'package:toursandtravel/screens/explore/explore.dart';
+import 'package:toursandtravel/screens/home/home.dart';
+import 'package:toursandtravel/screens/profile/account_settings/booking_history.dart';
+import 'package:toursandtravel/screens/profile/account_settings/change_password.dart';
+import 'package:toursandtravel/screens/profile/account_settings/edit_profile.dart';
+import 'package:toursandtravel/screens/profile/account_settings/language_preferences.dart';
+import 'package:toursandtravel/screens/profile/account_settings/notifications.dart';
+import 'package:toursandtravel/screens/profile/account_settings/payment_method.dart';
+import 'package:toursandtravel/screens/profile/profile.dart';
+import 'package:toursandtravel/screens/profile/support/about_us.dart';
+import 'package:toursandtravel/screens/profile/support/help_and_support.dart';
+import 'package:toursandtravel/screens/profile/support/privacy_and_policy.dart';
 
 void main() {
   runApp(MyApp());

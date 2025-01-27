@@ -1,6 +1,6 @@
 {
-    "name": "tourist_application",
-    "short_name": "tourist_application",
+    "name": "tours_travel",
+    "short_name": "tours_travel",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

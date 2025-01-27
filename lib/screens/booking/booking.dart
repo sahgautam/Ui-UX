@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:tourist_application/core/utils/util.dart';
+import 'package:toursandtravel/core/utils/util.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({Key? key}) : super(key: key);

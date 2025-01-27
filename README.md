@@ -1,4 +1,4 @@
-# tourist_application
+# tours_travel
 
 A new Flutter project.
 

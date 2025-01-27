@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tourist_application/core/utils/asset_provider.dart';
+import 'package:toursandtravel/core/utils/asset_provider.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});

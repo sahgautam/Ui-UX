@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tourist_application/screens/explore/explore.dart';
+import 'package:toursandtravel/screens/explore/explore.dart';
 
 import '../booking/booking.dart';
 import '../profile/profile.dart';

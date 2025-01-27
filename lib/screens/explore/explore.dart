@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tourist_application/core/utils/util.dart';
+import 'package:toursandtravel/core/utils/util.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});

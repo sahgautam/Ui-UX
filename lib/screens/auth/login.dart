@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tourist_application/screens/auth/register.dart';
-import 'package:tourist_application/screens/home/home.dart';
+import 'package:toursandtravel/screens/auth/register.dart';
+import 'package:toursandtravel/screens/home/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -99,7 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -147,7 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Navigate to HomeScreen
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
                           );
                         }
                       },
@@ -162,7 +165,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
-
                   ),
                   SizedBox(height: 20),
 
@@ -183,7 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildSocialMediaIcon(Icons.facebook, Colors.blue.shade800),
+                      _buildSocialMediaIcon(
+                          Icons.facebook, Colors.blue.shade800),
                       SizedBox(width: 20),
                       _buildSocialMediaIcon(Icons.g_mobiledata, Colors.red),
                       SizedBox(width: 20),
@@ -202,7 +205,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Navigate to RegisterScreen
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RegisterScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()),
                           );
                         },
                         child: Text(
@@ -212,7 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),

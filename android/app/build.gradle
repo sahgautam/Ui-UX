@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tourist_application"
+    namespace = "com.example.tours_travel"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
